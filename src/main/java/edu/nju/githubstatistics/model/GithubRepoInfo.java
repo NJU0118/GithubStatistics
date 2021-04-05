@@ -1,9 +1,5 @@
 package edu.nju.githubstatistics.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -12,39 +8,27 @@ import java.util.Date;
  * @description: GithubRepoInfo
  */
 
-@Entity
-@Table(name = "github_repo_info")
+
 public class GithubRepoInfo {
 
-    @Id
-    @Column(name = "info_id")
     private int infoId;
 
-    @Column(name = "full_name")
     private String fullName;
 
-    @Column(name = "language")
     private String language;
 
-    @Column(name = "private")
     private boolean nonPublic;
 
-    @Column(name = "fork")
     private boolean fork;
 
-    @Column(name = "has_description")
     private boolean hasDescription;
 
-    @Column(name = "has_license")
     private boolean hasLicense;
 
-    @Column(name = "size")
     private int size;
 
-    @Column(name = "star_count")
     private int starCount;
 
-    @Column(name = "created_at")
     private Date createdAt;
 
     public GithubRepoInfo() {

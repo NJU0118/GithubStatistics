@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.nju.githubstatistics.github_repo_info">
+
+
+    <resultMap id="language_count_row" type="edu.nju.githubstatistics.dto.LanguageCountRow">
+        <result property="language" column="language"/>
+        <result property="count" column="count"/>
+    </resultMap>
+
+    <select id="query_description_count" parameterType="java.util.Map" resultType="int">
+        SELECT count(*)
+        FROM spark_data.github_repo_info
+        WHERE 1 = 1
+        <if test="startTime != null">
+            AND created_at &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND created_at &lt;= #{endTime}
+        </if>
+        <if test="description != null">
+            AND has_description = #{description}
+        </if>
+    </select>
+
+    <select id="query_language_count" parameterType="java.util.Map" resultMap="language_count_row">
+        SELECT `language`, count(*) as `count`
+        FROM spark_data.github_repo_info
+        WHERE `language` IS NOT NULL
+        <if test="startTime != null">
+            AND created_at &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND created_at &lt;= #{endTime}
+        </if>
+        group by `language` order by `count` desc limit 10
+    </select>
+
+    <select id="query_license_count" parameterType="java.util.Map" resultType="int">
+        SELECT count(*)
+        FROM spark_data.github_repo_info
+        WHERE 1 = 1
+        <if test="startTime != null">
+            AND created_at &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND created_at &lt;= #{endTime}
+        </if>
+        <if test="license != null">
+            AND has_license = #{license}
+        </if>
+    </select>
+
+    <select id="query_size_count" parameterType="java.util.Map" resultType="int">
+        SELECT count(*)
+        FROM spark_data.github_repo_info
+        WHERE 1 = 1
+        <if test="startTime != null">
+            AND created_at &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND created_at &lt;= #{endTime}
+        </if>
+        <if test="startSize != null">
+            AND `size` &gt;= #{startSize}
+        </if>
+        <if test="endSize != null">
+            AND `size` &lt;= #{endSize}
+        </if>
+    </select>
+
+    <select id="query_star_count" parameterType="java.util.Map" resultType="int">
+        SELECT count(*)
+        FROM spark_data.github_repo_info
+        WHERE 1 = 1
+        <if test="startTime != null">
+            AND created_at &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND created_at &lt;= #{endTime}
+        </if>
+        <if test="startStar != null">
+            AND `star_count` &gt;= #{startStar}
+        </if>
+        <if test="endStar != null">
+            AND `star_count` &lt;= #{endStar}
+        </if>
+    </select>
+
+</mapper>

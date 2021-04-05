@@ -1,8 +1,6 @@
 package edu.nju.githubstatistics.service;
 
-import edu.nju.githubstatistics.model.GithubRepoInfo;
-
-import java.util.List;
+import edu.nju.githubstatistics.dto.*;
 
 /**
  * @author: Bright Chan
@@ -11,5 +9,13 @@ import java.util.List;
  */
 public interface GithubRepoInfoService {
 
-    List<GithubRepoInfo> query();
+    DescriptionCount queryDescriptionCount(String year);
+
+    LanguageCount queryLanguageCount(String year);
+
+    LicenseCount queryLicenseCount(String year);
+
+    SizeCount querySizeCount(String year);
+
+    StarCount queryStarCount(String year);
 }

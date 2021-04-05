@@ -1,8 +1,8 @@
 package edu.nju.githubstatistics.dao;
 
-import edu.nju.githubstatistics.model.GithubRepoInfo;
+import edu.nju.githubstatistics.dto.*;
 
-import java.util.List;
+import java.util.Date;
 
 /**
  * @author: Bright Chan
@@ -11,5 +11,13 @@ import java.util.List;
  */
 public interface GithubRepoInfoDao {
 
-    List<GithubRepoInfo> query();
+    DescriptionCount queryDescriptionCount(Date startTime, Date endTime);
+
+    LanguageCount queryLanguageCount(Date startTime, Date endTime);
+
+    LicenseCount queryLicenseCount(Date startTime, Date endTime);
+
+    SizeCount querySizeCount(Date startTime, Date endTime);
+
+    StarCount queryStarCount(Date startTime, Date endTime);
 }

@@ -1,13 +1,24 @@
 package edu.nju.githubstatistics.dao;
 
-import java.util.List;
+import org.apache.ibatis.session.SqlSession;
+
+import javax.annotation.Resource;
 
 /**
  * @author: Bright Chan
  * @date: 2021/4/1 17:12
  * @description: BaseDao
  */
-public interface BaseDao<T> {
+public class BaseDao {
 
-    List<T> getResultsByHQL(String hql);
+    @Resource
+    protected SqlSession sqlSession;
+
+    public SqlSession getSqlSession() {
+        return sqlSession;
+    }
+
+    public void setSqlSession(SqlSession sqlSession) {
+        this.sqlSession = sqlSession;
+    }
 }
